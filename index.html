@@ -55,8 +55,7 @@
 
 			// Disable the right-click context menu
 			video.addEventListener('contextmenu', (e) => {
-				e.preventDefault(); // Prevent the default context menu from showing
-				alert('Right-click is disabled on this video.');
+				e.stopPropagation(); // Prevent the default context menu from showing
 			});
 		</script>
 	</body>
