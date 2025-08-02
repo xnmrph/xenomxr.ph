@@ -4,13 +4,23 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 	box-sizing: border-box;
 }
 
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
 body {
+	display: flex;
+	flex-direction: column;
 	line-height: 1.0;
-	min-height: var(--viewport-height);
+	height: 100vh;
+	min-height: 100vh;
 	min-width: 320px;
-	overflow-x: hidden;
 	word-wrap: break-word;
 	background-color: #000000;
+	position: relative;
 }
 
 :root {
@@ -101,15 +111,15 @@ unloaded-script {
 }
 
 #wrapper {
-	-webkit-overflow-scrolling: touch;
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	min-height: var(--viewport-height);
-	overflow: hidden;
+	flex: 1;
+	width: 100%;
 	position: relative;
 	z-index: 2;
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 60px; /* Space for the fixed footer */
 }
 
 #main {
@@ -123,31 +133,33 @@ unloaded-script {
 	--border-radius-tr: 0;
 	--border-radius-br: 0;
 	--border-radius-bl: 0;
-	align-items: center;
 	display: flex;
-	flex-grow: 0;
-	flex-shrink: 0;
-	justify-content: center;
+	flex-direction: column;
+	flex: 1;
+	width: 100%;
 	max-width: 100%;
 	position: relative;
 	text-align: var(--alignment);
 	z-index: 1;
-	transform: perspective(1000px) rotateY(0deg);
-	transform-origin: 50% 50%;
 	transition: opacity 1s ease 0s,transform 1s ease 0s;
 }
 
 #main > .inner {
-	--padding-horizontal: 3rem;
-	--padding-vertical: 3rem;
-	--spacing: 1.5rem;
-	--width: 100vw;
+	--padding-horizontal: 1.5rem;
+	--padding-vertical: 1rem;
+	--spacing: 0.75rem;
+	--width: 100%;
 	border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
 	max-width: 100%;
 	position: relative;
 	width: var(--width);
 	z-index: 1;
 	padding: var(--padding-vertical) var(--padding-horizontal);
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow-y: auto;
 }
 
 #main > .inner > * {
@@ -391,9 +403,13 @@ h1 span[style], h2 span[style], h3 span[style], p span[style], h1 strong, h2 str
 
 #video01 video {
     border-radius: 0rem;
-    width: 54.875rem;
-    border: 2px solid #000000; /* Add white outline */
-    box-sizing: border-box; /* Ensure border doesn't affect overall size */
+    max-width: 100%;
+    height: auto;
+    max-height: 60vh; /* Limit video height to 60% of viewport */
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
 }
 
 #video01 .frame {
@@ -511,7 +527,13 @@ h1 span[style], h2 span[style], h3 span[style], p span[style], h1 strong, h2 str
 	align-items: center;
 	justify-content: center;
 	background-color: #000000;
-	box-shadow: 0rem 1.375rem 10rem 0rem rgba(0,0,0,0.31);
+	box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	height: 60px; /* Fixed height for the footer */
 }
 
 #container02:not(:first-child) {
